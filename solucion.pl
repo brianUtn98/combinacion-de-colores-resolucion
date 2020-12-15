@@ -12,7 +12,7 @@ precio(vestido, liso(negro), 3000).
 precio(saquito, liso(blanco), 1500).
 
 
-paleta(sobria, negro).	
+paleta(sobria, negro).
 paleta(sobria, azul).  	
 paleta(sobria, blanco).        
 paleta(sobria, gris).
@@ -23,9 +23,7 @@ paleta(furiosa, rojo).
 paleta(furiosa, violeta).  
 paleta(furiosa, fucsia).
 
-esPrenda(prenda(Prenda, estampado(floreado,Colores))) :- precio(Prenda, estampado(floreado,Colores), _).
-esPrenda(prenda(Prenda, estampado(rayado, Colores))) :- precio(Prenda, estampado(rayado,Colores), _).
-esPrenda(prenda(Prenda, liso(Color))) :- precio(Prenda, liso(Color), _).
+prenda(prenda(Prenda,Tela)):-precio(Prenda,Tela,_).
 
 % 1) coloresCombinables/2 relaciona dos colores distintos si se encuentran en una misma paleta 
 % o si uno de ellos es el negro, que puede combinarse con cualquier otro. 
@@ -44,7 +42,7 @@ esColor(Color):-paleta(_, Color).
 % y no tiene dos colores que pertenezcan a una misma paleta.
 
 
-colorinche(prenda(Prenda, Tela)) :- esPrenda(prenda(Prenda, Tela)), estampadaConColoresEnDistintaPaleta(Tela).
+colorinche(prenda(Prenda, Tela)) :- prenda(prenda(Prenda, Tela)), estampadaConColoresEnDistintaPaleta(Tela).
 estampadaConColoresEnDistintaPaleta(estampado(_, Colores)) :- member(Color, Colores),
     forall((member(OtroColor, Colores), Color \= OtroColor ), not(estanEnMismaPaleta(Color, OtroColor))).
 
@@ -58,7 +56,7 @@ colorDeModa(Color) :- esColor(Color), forall( precio(_, estampado(_, Colores), _
 
 % prenda(remera, estampado(rayado, [verde, negro, rojo]))
 
-combinan(prenda(Prenda, Tela), prenda(OtraPrenda, OtraTela)) :- esPrenda(prenda(Prenda, Tela)), esPrenda(prenda(OtraPrenda, OtraTela)), 
+combinan(prenda(Prenda, Tela), prenda(OtraPrenda, OtraTela)) :- prenda(prenda(Prenda, Tela)), prenda(prenda(OtraPrenda, OtraTela)), 
                                         telasQuedanBien(Tela, OtraTela).
 telasQuedanBien(liso(Color), liso(OtroColor)) :- coloresCombinables(Color, OtroColor).
 telasQuedanBien(liso(Color), estampado(_, Colores)) :- combinaAlgunColor(Colores, Color).
@@ -76,5 +74,5 @@ precioMaximo(Prenda, PrecioMaximo) :- precio(Prenda, _, PrecioMaximo), not((prec
 % con todas las otras y tiene al menos dos elementos.
 
 conjuntoValido(Prendas) :- hayAlMenosDosPrendas(Prendas), combinanTodas(Prendas).
-combinanTodas(Prendas) :- member(Prenda, Prendas), forall((member(OtraPrenda, Prendas), Prenda \= OtraPrenda), combinan(Prenda, OtraPrenda)).
+combinanTodas(Prendas) :- forall((member(Prenda,Prendas),member(OtraPrenda, Prendas), Prenda \= OtraPrenda), combinan(Prenda, OtraPrenda)).
 hayAlMenosDosPrendas(Prendas) :- length(Prendas, Size), Size >= 2.
