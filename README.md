@@ -1,6 +1,8 @@
 ## combinacion-de-colores-resolucion
 
 # Enunciado
+Queremos analizar información relacionada con prendas de ropa y validar qué tan buen gusto tenemos para combinarlas, para lo cual obviamente decidimos hacer un programa en Prolog que nos dé una mano. Para ello tenemos la siguiente base de conocimientos:
+<img src="26173fbc-ab15-4b12-b223-c09b5e1f1992.jpg">
 
 % precio(tipo de prenda, tela de la prenda, precio de venta)
 % los tipos de tela son: estampado(patron, lista de colores que tiene) o 
