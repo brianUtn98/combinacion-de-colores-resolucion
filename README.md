@@ -6,6 +6,7 @@ Créditos a @diegosedlaruk quien rindió el parcial, se hicieron pequeñas corre
 Queremos analizar información relacionada con prendas de ropa y validar qué tan buen gusto tenemos para combinarlas, para lo cual obviamente decidimos hacer un programa en Prolog que nos dé una mano. Para ello tenemos la siguiente base de conocimientos: <br>
 <img src="26173fbc-ab15-4b12-b223-c09b5e1f1992.jpg">
 
+```prolog
 % precio(tipo de prenda, tela de la prenda, precio de venta)
 % los tipos de tela son: estampado(patron, lista de colores que tiene) o 
 % liso(color)
@@ -25,7 +26,7 @@ paleta(alegre, amarillo).
 paleta(furiosa, rojo).  
 paleta(furiosa, violeta).  
 paleta(furiosa, fucsia).
-
+```
 Definir los siguientes predicados de modo que sean **totalmente inversibles** a menos que se indique lo contrario en ese punto:
 
 1. coloresCombinables/2 relaciona dos colores distintos si se encuentran en una misma paleta o si uno de ellos es el negro, que puede combinarse con cualquier otro.
